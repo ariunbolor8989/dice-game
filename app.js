@@ -1,7 +1,7 @@
 //тоглох ээлжийг хадгалах хувьсагч
 var activePlayer = 0;
 //тоглогчдын цуглуулсан оноог хадгалах хувьсагч
-var scores = [0, 25];
+var scores = [0, 0];
 // идэюртэй тоглогчын цуглуулсан оноог хадгалах функц
 var roundScore = 0;
 //Шоо аль талаараа буусныг хадгалах хувьсагч 1-6гэсэн утгыг энэ хувьсагчид санамсаргүйгээр оноож өгнө
@@ -51,8 +51,29 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
   document.getElementById("score-" + activePlayer).textContent =
     scores[activePlayer];
   document.getElementById("current-" + activePlayer).textContent = 0;
-  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
   roundScore = 0;
-  document.querySelector(".player-1-panel").classList.toggle("active");
-  document.querySelector(".player-0-panel").classList.toggle("active");
+
+  if (scores[activePlayer] >= 10) {
+    document.getElementById("name-" + activePlayer).textContent = "Winner!!!";
+    alert(activePlayer + " winner");
+  } else {
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    document.querySelector(".player-0-panel").classList.toggle("active");
+  }
+});
+
+document.querySelector(".btn-new").addEventListener("click", function () {
+  scores = [0, 0];
+  activePlayer = 0;
+  diceDom.style.display = "none";
+  window.document.getElementById("score-0").textContent = "0";
+  window.document.getElementById("score-1").textContent = "0";
+
+  window.document.getElementById("current-0").textContent = "0";
+  window.document.getElementById("current-1").textContent = "0";
+  roundScore = 0;
+  document.querySelector(".player-0-panel").classList.add("active");
+  document.querySelector(".player-1-panel").classList.remove("active");
 });
